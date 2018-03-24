@@ -27,13 +27,9 @@ RUN go test -race . ./beater &&\
     go build -ldflags '-s -w' -o /journalbeat
 
 
-FROM debian:stretch-slim
+FROM lborguetti/docker-base-image:stable
 
 MAINTAINER mbrooks
-
-RUN apt update &&\
-    apt install -y ca-certificates &&\
-    rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /journalbeat /
 
